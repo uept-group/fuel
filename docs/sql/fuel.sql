@@ -12,5 +12,17 @@ CREATE TABLE `namesrv` (
 CREATE TABLE `topic` (
 	`id` INT(11) NOT NULL,
 	`name` VARCHAR(80) NOT NULL DEFAULT '' COLLATE 'utf8mb4_bin',
+	`queue_num` INT(5) NULL DEFAULT NULL COMMENT '队列个数',
+	`broker` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
+	`namesrv` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
+	`app_id` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
+	`app_name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
+	`group` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
+	`owner` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
+	`note` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_bin',
 	PRIMARY KEY (`id`) USING BTREE
-) COMMENT='topic表' COLLATE='utf8mb4_bin' ENGINE=InnoDB ;
+)
+COMMENT='topic表'
+COLLATE='utf8mb4_bin'
+ENGINE=InnoDB
+;
