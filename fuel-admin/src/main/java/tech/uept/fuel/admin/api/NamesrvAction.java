@@ -15,7 +15,18 @@ public class NamesrvAction {
     @Resource
     private NamesrvService namesrvService;
 
+    @RequestMapping("/insert")
     public void insert(NamesrvModel namesrvModel) {
         namesrvService.insert(namesrvModel);
+    }
+
+    @RequestMapping("/update")
+    public void update(NamesrvModel namesrvModel) {
+        namesrvService.update(namesrvModel);
+    }
+
+    @RequestMapping("/all")
+    public Object all() {
+        return namesrvService.all();
     }
 }

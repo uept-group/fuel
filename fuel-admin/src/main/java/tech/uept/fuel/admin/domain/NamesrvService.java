@@ -19,4 +19,12 @@ public class NamesrvService {
         namesrvMapper.insert(po);
     }
 
+    public void update(NamesrvModel namesrvModel) {
+        NamesrvPo po = BeanUtils.getCopy(namesrvModel, new NamesrvPo());
+        namesrvMapper.updateById(po);
+    }
+
+    public Object all() {
+        return namesrvMapper.selectList(null);
+    }
 }
