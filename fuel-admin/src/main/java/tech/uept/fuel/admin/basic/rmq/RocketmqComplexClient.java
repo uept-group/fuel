@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.admin.TopicStatsTable;
 import org.apache.rocketmq.common.protocol.body.TopicList;
 import org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
 import org.apache.rocketmq.tools.admin.MQAdminExt;
@@ -17,12 +18,22 @@ public class RocketmqComplexClient {
 
     private Map<String, MQAdminExt> cache = new ConcurrentHashMap<String, MQAdminExt>();
 
-    public List<String> queryTopic(String namesrv) {
+    public List<String> topicList(String namesrv) {
         MQAdminExt admin = getAdmin(namesrv);
         try {
             TopicList topicList = admin.fetchAllTopicList();
             Set<String> topics = topicList.getTopicList();
             return new ArrayList<String>(topics);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public TopicStatsTable topicStatus(String namesrv, String topic) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            TopicStatsTable s = admin.examineTopicStats(topic);
+            return s;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

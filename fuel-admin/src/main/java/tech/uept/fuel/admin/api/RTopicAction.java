@@ -15,8 +15,13 @@ public class RTopicAction {
     @Resource
     private RTopicService rTopicService;
 
-    @RequestMapping("/all")
-    public Object queryAll(@RequestParam(name = "id") Integer id) {
-        return rTopicService.queryAllTopic(id);
+    @RequestMapping("/list")
+    public Object list(@RequestParam(name = "id") Integer id) {
+        return rTopicService.list(id);
+    }
+
+    @RequestMapping("/status")
+    public Object status(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
+        return rTopicService.status(id, topic);
     }
 }
