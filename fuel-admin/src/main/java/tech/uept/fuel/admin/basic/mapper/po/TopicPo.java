@@ -1,4 +1,4 @@
-package tech.uept.fuel.admin.basic.dao.po;
+package tech.uept.fuel.admin.basic.mapper.po;
 
 import com.baomidou.mybatisplus.annotations.TableName;
 
