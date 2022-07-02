@@ -5,6 +5,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import tech.uept.fuel.admin.basic.mapper.TopicMapper;
+import tech.uept.fuel.admin.basic.mapper.po.TopicPo;
+import tech.uept.fuel.admin.basic.model.TopicModel;
+import tech.uept.fuel.admin.basic.util.BeanUtils;
 
 @Service
 public class TopicService {
@@ -16,4 +19,11 @@ public class TopicService {
         return topicMapper.selectCount(null);
     }
 
+    public void insert(TopicModel topicModel) {
+        
+        
+        
+        TopicPo po = BeanUtils.getCopy(topicModel, new TopicPo());
+        topicMapper.insert(po);
+    }
 }

@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tech.uept.fuel.admin.basic.model.TopicModel;
 import tech.uept.fuel.admin.domain.TopicService;
 
 @RestController
@@ -19,4 +20,7 @@ public class TopicAction {
         return topicService.query();
     }
 
+    public void insert(TopicModel topicModel) {
+        topicService.insert(topicModel);
+    }
 }
