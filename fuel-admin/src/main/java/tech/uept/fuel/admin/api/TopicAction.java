@@ -2,6 +2,7 @@ package tech.uept.fuel.admin.api;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,8 @@ public class TopicAction {
         return topicService.query();
     }
 
-    public void insert(TopicModel topicModel) {
+    @RequestMapping("/insert")
+    public void insert(@RequestBody TopicModel topicModel) {
         topicService.insert(topicModel);
     }
 }

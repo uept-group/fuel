@@ -10,7 +10,7 @@ CREATE TABLE `namesrv` (
 
 -- topic表
 CREATE TABLE `topic` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(80) COLLATE utf8mb4_bin DEFAULT '' COMMENT '名称',
   `queue_num` int(5) DEFAULT NULL COMMENT '队列个数',
   `broker` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '逗号分割',
