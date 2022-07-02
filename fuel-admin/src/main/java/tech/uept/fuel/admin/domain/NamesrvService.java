@@ -27,4 +27,8 @@ public class NamesrvService {
     public Object all() {
         return namesrvMapper.selectList(null);
     }
+
+    public String getAddrById(int id) {
+        return namesrvMapper.selectById(id).getAddr();
+    }
 }
