@@ -1,6 +1,6 @@
 package tech.uept.fuel.admin.basic.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import tech.uept.fuel.admin.basic.mapper.po.TopicPo;
 

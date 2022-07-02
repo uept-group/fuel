@@ -2,6 +2,8 @@ package tech.uept.fuel.admin.basic.model;
 
 public class TopicModel {
 
+    private Integer id;
+
     private String name;
 
     private int queueNum;
@@ -14,7 +16,7 @@ public class TopicModel {
 
     private String appName;
 
-    private String group;
+    private String department;
 
     private String owner;
 
@@ -22,6 +24,14 @@ public class TopicModel {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -68,12 +78,12 @@ public class TopicModel {
         this.appName = appName;
     }
 
-    public String getGroup() {
-        return group;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getOwner() {

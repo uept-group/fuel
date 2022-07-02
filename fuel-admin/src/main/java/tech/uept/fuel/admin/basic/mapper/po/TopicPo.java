@@ -1,10 +1,14 @@
 package tech.uept.fuel.admin.basic.mapper.po;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 @TableName("topic")
 public class TopicPo {
+
+    @TableId
+    private Integer id;
 
     private String name;
 
@@ -21,7 +25,7 @@ public class TopicPo {
     @TableField("app_name")
     private String appName;
 
-    private String group;
+    private String department;
 
     private String owner;
 
@@ -75,12 +79,20 @@ public class TopicPo {
         this.appName = appName;
     }
 
-    public String getGroup() {
-        return group;
+    public Integer getId() {
+        return id;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getOwner() {
