@@ -11,11 +11,12 @@ import tech.uept.fuel.admin.domain.TopicService;
 @RequestMapping("/topic")
 public class TopicAction {
 
-	@Resource
-	private TopicService topicService;
+    @Resource
+    private TopicService topicService;
 
-	@RequestMapping("/query")
-	public Object query() {
-		return topicService.query();
-	}
+    @RequestMapping("/query")
+    public Object query() {
+        return topicService.query();
+    }
+
 }
