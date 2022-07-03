@@ -8,7 +8,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.admin.TopicStatsTable;
+import org.apache.rocketmq.common.protocol.body.GroupList;
 import org.apache.rocketmq.common.protocol.body.TopicList;
+import org.apache.rocketmq.common.protocol.route.TopicRouteData;
 import org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
 import org.apache.rocketmq.tools.admin.MQAdminExt;
 import org.springframework.stereotype.Component;
@@ -34,6 +36,26 @@ public class RocketmqComplexClient {
         try {
             TopicStatsTable s = admin.examineTopicStats(topic);
             return s;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public TopicRouteData topicRoute(String namesrv, String topic) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            TopicRouteData d = admin.examineTopicRouteInfo(topic);
+            return d;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<String> topicQueryConsumer(String namesrv, String topic) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            GroupList d = admin.queryTopicConsumeByWho(topic);
+            return new ArrayList<String>(d.getGroupList());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

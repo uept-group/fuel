@@ -24,4 +24,14 @@ public class RTopicAction {
     public Object status(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
         return rTopicService.status(id, topic);
     }
+
+    @RequestMapping("/route")
+    public Object route(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
+        return rTopicService.route(id, topic);
+    }
+
+    @RequestMapping("/consumer")
+    public Object consumer(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
+        return rTopicService.consumer(id, topic);
+    }
 }
