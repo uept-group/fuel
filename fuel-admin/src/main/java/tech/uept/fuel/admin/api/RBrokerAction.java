@@ -19,8 +19,11 @@ public class RBrokerAction {
 
     @RequestMapping("/list")
     public void list(@RequestBody HashMap<String, Object> map) {
-        rBrokerService.updateBroker((Integer) map.get("id"), (String) map.get("brokerName"), (String) map.get("key"),
-                (String) map.get("value"));
+        Integer id = (Integer) map.get("id");
+        String brokerName = (String) map.get("brokerName");
+        String key = (String) map.get("key");
+        String value = (String) map.get("value");
+        rBrokerService.updateBroker(id, brokerName, key, value);
     }
 
 }
