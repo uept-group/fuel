@@ -17,8 +17,8 @@ public class RBrokerAction {
     @Resource
     private RBrokerService rBrokerService;
 
-    @RequestMapping("/list")
-    public void list(@RequestBody HashMap<String, Object> map) {
+    @RequestMapping("/update")
+    public void update(@RequestBody HashMap<String, Object> map) {
         Integer id = (Integer) map.get("id");
         String brokerName = (String) map.get("brokerName");
         String key = (String) map.get("key");
