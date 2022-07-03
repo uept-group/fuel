@@ -41,4 +41,5 @@ public class RTopicService {
         List<String> consumerList = client.topicQueryConsumer(addr, topic);
         return consumerList;
     }
+
 }

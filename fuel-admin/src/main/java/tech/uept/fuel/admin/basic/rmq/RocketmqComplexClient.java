@@ -3,13 +3,16 @@ package tech.uept.fuel.admin.basic.rmq;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.admin.TopicStatsTable;
+import org.apache.rocketmq.common.protocol.body.ClusterInfo;
 import org.apache.rocketmq.common.protocol.body.GroupList;
 import org.apache.rocketmq.common.protocol.body.TopicList;
+import org.apache.rocketmq.common.protocol.route.BrokerData;
 import org.apache.rocketmq.common.protocol.route.TopicRouteData;
 import org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
 import org.apache.rocketmq.tools.admin.MQAdminExt;
@@ -56,6 +59,21 @@ public class RocketmqComplexClient {
         try {
             GroupList d = admin.queryTopicConsumeByWho(topic);
             return new ArrayList<String>(d.getGroupList());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void brokerUpdate(String namesrv, String brokerName, String key, String value) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            ClusterInfo info = admin.examineBrokerClusterInfo();
+            BrokerData brokerData = info.getBrokerAddrTable().get(brokerName);
+            for (String addr : brokerData.getBrokerAddrs().values()) {
+                Properties ps = new Properties();
+                ps.setProperty(key, value);
+                admin.updateBrokerConfig(addr, ps);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

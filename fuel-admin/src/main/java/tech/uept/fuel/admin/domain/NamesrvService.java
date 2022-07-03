@@ -28,7 +28,11 @@ public class NamesrvService {
         return namesrvMapper.selectList(null);
     }
 
-    public String getAddrById(int id) {
+    public String getAddrById(Integer id) {
         return namesrvMapper.selectById(id).getAddr();
+    }
+
+    public void delete(Integer id) {
+        namesrvMapper.deleteById(id);
     }
 }

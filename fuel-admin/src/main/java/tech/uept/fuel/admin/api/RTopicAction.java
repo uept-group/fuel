@@ -34,4 +34,5 @@ public class RTopicAction {
     public Object consumer(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
         return rTopicService.consumer(id, topic);
     }
+
 }
