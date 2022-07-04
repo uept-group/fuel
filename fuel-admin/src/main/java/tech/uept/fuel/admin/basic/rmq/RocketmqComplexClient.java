@@ -1,6 +1,7 @@
 package tech.uept.fuel.admin.basic.rmq;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -11,6 +12,7 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.admin.TopicStatsTable;
 import org.apache.rocketmq.common.protocol.body.ClusterInfo;
 import org.apache.rocketmq.common.protocol.body.GroupList;
+import org.apache.rocketmq.common.protocol.body.SubscriptionGroupWrapper;
 import org.apache.rocketmq.common.protocol.body.TopicList;
 import org.apache.rocketmq.common.protocol.route.BrokerData;
 import org.apache.rocketmq.common.protocol.route.TopicRouteData;
@@ -84,6 +86,22 @@ public class RocketmqComplexClient {
                 ps.setProperty(key, value);
                 admin.updateBrokerConfig(addr, ps);
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<String> consumerList(String namesrv) {
+        MQAdminExt admin = getAdmin(namesrv);
+        Set<String> set = new HashSet<String>();
+        try {
+            ClusterInfo clusterInfo = admin.examineBrokerClusterInfo();
+            for (BrokerData brokerData : clusterInfo.getBrokerAddrTable().values()) {
+                SubscriptionGroupWrapper subscriptionGroupWrapper = admin
+                        .getAllSubscriptionGroup(brokerData.selectBrokerAddr(), 3000L);
+                set.addAll(subscriptionGroupWrapper.getSubscriptionGroupTable().keySet());
+            }
+            return new ArrayList<>(set);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
