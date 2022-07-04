@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan("tech.uept.fuel.admin.basic.mapper")
 public class FuelApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(FuelApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FuelApplication.class, args);
+    }
 }
