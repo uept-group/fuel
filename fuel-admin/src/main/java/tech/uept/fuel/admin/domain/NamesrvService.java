@@ -1,5 +1,8 @@
 package tech.uept.fuel.admin.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +27,13 @@ public class NamesrvService {
         namesrvMapper.updateById(po);
     }
 
-    public Object all() {
-        return namesrvMapper.selectList(null);
+    public List<NamesrvModel> all() {
+        List<NamesrvPo> listPo = namesrvMapper.selectList(null);
+        List<NamesrvModel> listModel = new ArrayList<>();
+        for (NamesrvPo po : listPo) {
+            listModel.add(BeanUtils.getCopy(po, new NamesrvModel()));
+        }
+        return listModel;
     }
 
     public String getAddrById(Integer id) {

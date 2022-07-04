@@ -26,4 +26,9 @@ public class RBrokerAction {
         rBrokerService.updateBroker(id, brokerName, key, value);
     }
 
+    @RequestMapping("/queryList")
+    public Object queryList() {
+        return rBrokerService.queryList();
+    }
+
 }

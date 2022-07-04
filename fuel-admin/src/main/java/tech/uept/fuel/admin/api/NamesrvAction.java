@@ -24,12 +24,11 @@ public class NamesrvAction {
     public void update(NamesrvModel namesrvModel) {
         namesrvService.update(namesrvModel);
     }
-    
+
     @RequestMapping("/delete")
     public void delete(NamesrvModel namesrvModel) {
         namesrvService.delete(namesrvModel.getId());
     }
-
 
     @RequestMapping("/all")
     public Object all() {

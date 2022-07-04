@@ -64,6 +64,16 @@ public class RocketmqComplexClient {
         }
     }
 
+    public ClusterInfo queryBrokerInfo(String namesrv) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            ClusterInfo info = admin.examineBrokerClusterInfo();
+            return info;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void brokerUpdate(String namesrv, String brokerName, String key, String value) {
         MQAdminExt admin = getAdmin(namesrv);
         try {
