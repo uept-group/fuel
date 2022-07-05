@@ -1,5 +1,5 @@
 package tech.fuel.test;
 
-public class Main {
+public class Main1 {
 
 }
