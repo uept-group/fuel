@@ -8,8 +8,10 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.rocketmq.client.QueryResult;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.admin.TopicStatsTable;
+import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.common.protocol.body.ClusterInfo;
 import org.apache.rocketmq.common.protocol.body.GroupList;
 import org.apache.rocketmq.common.protocol.body.ProducerConnection;
@@ -20,6 +22,10 @@ import org.apache.rocketmq.common.protocol.route.TopicRouteData;
 import org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
 import org.apache.rocketmq.tools.admin.MQAdminExt;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+
+import tech.uept.fuel.admin.basic.model.QueryMessage;
+import tech.uept.fuel.admin.basic.util.BeanUtils;
 
 @Component
 public class RocketmqComplexClient {
@@ -113,6 +119,24 @@ public class RocketmqComplexClient {
         try {
             ProducerConnection producerConnection = admin.examineProducerConnectionInfo(producerGroup, topic);
             return producerConnection;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<QueryMessage> messageQueryByKey(String namesrv, String topic, String key) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            List<QueryMessage> list = new ArrayList<QueryMessage>();
+            QueryResult queryResult = admin.queryMessage(topic, key, 64, 0, System.currentTimeMillis());
+            if (queryResult == null || CollectionUtils.isEmpty(queryResult.getMessageList())) {
+                return list;
+            }
+            for (MessageExt messageExt : queryResult.getMessageList()) {
+                QueryMessage queryMessage = BeanUtils.msgToMsg(messageExt);
+                list.add(queryMessage);
+            }
+            return list;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
