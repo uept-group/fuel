@@ -12,6 +12,7 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.admin.TopicStatsTable;
 import org.apache.rocketmq.common.protocol.body.ClusterInfo;
 import org.apache.rocketmq.common.protocol.body.GroupList;
+import org.apache.rocketmq.common.protocol.body.ProducerConnection;
 import org.apache.rocketmq.common.protocol.body.SubscriptionGroupWrapper;
 import org.apache.rocketmq.common.protocol.body.TopicList;
 import org.apache.rocketmq.common.protocol.route.BrokerData;
@@ -66,7 +67,7 @@ public class RocketmqComplexClient {
         }
     }
 
-    public ClusterInfo queryBrokerInfo(String namesrv) {
+    public ClusterInfo brokerQueryInfo(String namesrv) {
         MQAdminExt admin = getAdmin(namesrv);
         try {
             ClusterInfo info = admin.examineBrokerClusterInfo();
@@ -102,6 +103,16 @@ public class RocketmqComplexClient {
                 set.addAll(subscriptionGroupWrapper.getSubscriptionGroupTable().keySet());
             }
             return new ArrayList<>(set);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ProducerConnection producerConnection(String namesrv, String producerGroup, String topic) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            ProducerConnection producerConnection = admin.examineProducerConnectionInfo(producerGroup, topic);
+            return producerConnection;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -35,7 +35,7 @@ public class RBrokerService {
         List<BrokerModel> returnlist = new ArrayList<>();
 
         for (NamesrvModel namesrvModel : list) {
-            ClusterInfo cinfo = client.queryBrokerInfo(namesrvModel.getAddr());
+            ClusterInfo cinfo = client.brokerQueryInfo(namesrvModel.getAddr());
             Collection<BrokerData> bs = cinfo.getBrokerAddrTable().values();
             for (BrokerData b : bs) {
                 HashMap<Long, String> mapAddrs = b.getBrokerAddrs();
