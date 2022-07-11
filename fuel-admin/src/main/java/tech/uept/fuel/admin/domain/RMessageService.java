@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import tech.uept.fuel.admin.basic.model.MessagePage;
+import tech.uept.fuel.admin.basic.model.MessageQuery;
 import tech.uept.fuel.admin.basic.model.QueryMessage;
 import tech.uept.fuel.admin.basic.rmq.RocketmqComplexClient;
 
@@ -22,5 +24,9 @@ public class RMessageService {
         String namesrv = namesrvService.getAddrById(nid);
         List<QueryMessage> list = client.messageQueryByKey(namesrv, topic, key);
         return list;
+    }
+
+    public MessagePage queryMessageByPage(MessageQuery query) {
+        return null;
     }
 }
