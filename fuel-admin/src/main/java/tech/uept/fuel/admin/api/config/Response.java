@@ -3,13 +3,13 @@ package tech.uept.fuel.admin.api.config;
 public class Response {
 
     // 系统异常，比如空指针，比如参数越界。这种异常是后端开发必须处理的。
-    public static final int systemError = 1000;
+    public static final int systemError = 10000;
 
     // 成功
-    public static final int success = 2000;
+    public static final int success = 20000;
 
     // 业务异常，比如密码错误，这种只需要用户知道，后端无需修改
-    public static final int bizError = 3000;
+    public static final int bizError = 30000;
 
     // 返回接口的code
     private int code;
