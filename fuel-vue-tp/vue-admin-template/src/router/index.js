@@ -68,6 +68,12 @@ export const constantRoutes = [
         meta: { title: '名称服务', icon: 'tree' }
       },
       {
+        path: 'broker',
+        name: 'Broker',
+        component: () => import('@/views/broker/index'),
+        meta: { title: 'broker', icon: 'tree' }
+      },
+      {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/consumegroup/index'),

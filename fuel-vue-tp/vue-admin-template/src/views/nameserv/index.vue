@@ -1,8 +1,8 @@
 <template>
   <div class="indexContainer">
     <div class="tableBox">
-      <el-row type="flex" class="row-bg" justify="end">
-        <el-button type="primary" size="medium" icon="el-icon-plus" @click="showDialog = true">新增</el-button>
+      <el-row type="flex" class="row-bg" justify="start">
+        <el-button type="primary" size="medium" icon="el-icon-plus" @click="showDialog = true">新增名称服务</el-button>
       </el-row>
       <el-row type="flex">
         <el-table
@@ -75,9 +75,9 @@
         </el-table>
       </el-row>
       <el-dialog
-        title="新增NameServer"
+        title="新增名称服务"
         :visible.sync="showDialog"
-        width="30%"
+        width="50%"
         :before-close="handleClose"
       >
         <el-form :model="form">
