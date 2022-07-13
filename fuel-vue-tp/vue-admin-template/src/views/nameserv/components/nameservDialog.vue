@@ -56,15 +56,9 @@ export default {
       type: Boolean,
       default: false
     },
-    btnDisable: {
-      type: Boolean,
-      default: false
-    },
-    info: {
-      type: Array,
-      default: function() {
-        return []
-      }
+    formData: {
+      type: Object,
+      default: null
     },
     title: {
       type: String,

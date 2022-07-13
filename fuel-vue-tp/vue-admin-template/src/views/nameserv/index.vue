@@ -78,6 +78,7 @@
       :title="title"
       :v-if="showDialog"
       :visible="showDialog"
+      :form-data="formData"
       @on-config-cancel="configCancelCallback"
       @on-save-nameserv="saveNameservCallback"
     />
@@ -85,7 +86,7 @@
 </template>
 <script>
 
-import { getNameServList, addNameServ, delNameServ } from '@/api/nameserv'
+import { getNameServList, addNameServ, delNameServ, modNameServ } from '@/api/nameserv'
 import NameservDialog from './components/nameservDialog.vue'
 
 export default {
@@ -102,7 +103,13 @@ export default {
         total: 0
       },
       showDialog: false,
-      title: '新增名称服务'
+      title: '新增名称服务',
+      formData: {
+        id: '',
+        addr: '',
+        name: '',
+        note: ''
+      }
     }
   },
   computed: {
@@ -118,7 +125,8 @@ export default {
       })
     },
     handleEdit(index, row) {
-      console.log(index, row)
+      this.showDialog = true
+      this.formData = { ...row }
     },
     handleDelete(index, row) {
       this.$confirm('此操作将永久删除该配置信息, 是否继续?', '', {
