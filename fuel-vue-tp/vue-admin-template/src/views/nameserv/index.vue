@@ -19,19 +19,19 @@
           <el-table-column
             align="center"
             prop="name"
-            label="服务名称"
+            label="名称"
             show-overflow-tooltip
           />
           <el-table-column
             align="center"
             prop="code"
-            label="服务编码"
+            label="编码"
             show-overflow-tooltip
           />
           <el-table-column
             align="center"
             prop="addr"
-            label="ip地址"
+            label="namesrv 地址"
             show-overflow-tooltip
           />
           <el-table-column
@@ -79,12 +79,13 @@
       :v-if="showDialog"
       :visible="showDialog"
       @on-config-cancel="configCancelCallback"
+      @on-save-nameserv="saveNameservCallback"
     />
   </div>
 </template>
 <script>
 
-import { getNameServList } from '@/api/nameserv'
+import { getNameServList, addNameServ, delNameServ } from '@/api/nameserv'
 import NameservDialog from './components/nameservDialog.vue'
 
 export default {
@@ -120,13 +121,44 @@ export default {
       console.log(index, row)
     },
     handleDelete(index, row) {
-      console.log(index, row)
+      this.$confirm('此操作将永久删除该配置信息, 是否继续?', '', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        delNameServ(row).then(res => {
+          if (res.code === 20000) {
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            this.fetchData()
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     handleShowDialog(val) {
-      console.log('12312313', val)
       this.showDialog = val
     },
     configCancelCallback() {
+      this.showDialog = false
+    },
+    saveNameservCallback(ruleForm) {
+      addNameServ(ruleForm).then(res => {
+        if (res.code === 20000) {
+          this.$message({
+            showClose: true,
+            message: '创建成功',
+            type: 'success'
+          })
+          this.fetchData()
+        }
+      })
       this.showDialog = false
     }
   }
