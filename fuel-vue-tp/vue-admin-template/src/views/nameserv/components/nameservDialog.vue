@@ -49,14 +49,13 @@ export default {
         return []
       }
     },
-    width: {
+    title: {
       type: String,
-      default: '50%'
+      default: ''
     }
   },
   data() {
     return {
-      title: '',
       formLabelWidth: '120px',
       form: {
         name: '',

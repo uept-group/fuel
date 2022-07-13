@@ -75,6 +75,7 @@
       </el-row>
     </div>
     <NameservDialog
+      :title="title"
       :v-if="showDialog"
       :visible="showDialog"
       @on-config-cancel="configCancelCallback"
@@ -99,7 +100,8 @@ export default {
         pageSize: 10,
         total: 0
       },
-      showDialog: false
+      showDialog: false,
+      title: '新增名称服务'
     }
   },
   computed: {
