@@ -2,7 +2,7 @@
   <div class="indexContainer">
     <div class="tableBox">
       <el-row type="flex" class="row-bg" justify="end">
-        <el-button type="primary" size="medium">新增</el-button>
+        <el-button type="primary" size="medium" icon="el-icon-plus">新增</el-button>
       </el-row>
       <el-row type="flex">
         <el-table
@@ -61,11 +61,13 @@
             <template slot-scope="scope">
               <el-button
                 size="mini"
+                icon="el-icon-edit"
                 @click="handleEdit(scope.$index, scope.row)"
               >编辑</el-button>
               <el-button
                 size="mini"
                 type="danger"
+                icon="el-icon-delete"
                 @click="handleDelete(scope.$index, scope.row)"
               >删除</el-button>
             </template>
@@ -120,12 +122,13 @@ export default {
     }
     .el-row {
     margin-bottom: 10px;
+    border-radius: 10px;
     &:last-child {
         margin-bottom: 0;
     }
   }
    .row-bg {
-    padding: 10px 30px;
+    padding: 10px 55px;
     background-color: #f9fafc;
   }
   .tableBox {
