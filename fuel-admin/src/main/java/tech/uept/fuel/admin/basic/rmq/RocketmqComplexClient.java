@@ -1,6 +1,7 @@
 package tech.uept.fuel.admin.basic.rmq;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -98,11 +99,15 @@ public class RocketmqComplexClient {
         }
     }
 
-    public Properties brokerGetConfig(String namesrv, String brokerAddr) {
+    public Map<String, String> brokerGetConfig(String namesrv, String brokerAddr) {
         MQAdminExt admin = getAdmin(namesrv);
         try {
+            Map<String, String> map = new HashMap<String, String>();
             Properties properties = admin.getBrokerConfig(brokerAddr);
-            return properties;
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+                map.put((String) entry.getKey(), (String) entry.getValue());
+            }
+            return map;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -36,7 +36,8 @@ public class BrokerConfigTask {
             return;
         }
         NamesrvModel n = list.get(0);
-        Properties properties = brokerService.getConfig(n.getId(), brokerService.queryList().get(0).getAddress());
+        Map<String, String> properties = brokerService.getConfig(n.getId(),
+                brokerService.queryList().get(0).getAddress());
         List<BrokerConfigPo> listBrokerConfigPos = brokerConfigMapper.selectList(null);
         for (BrokerConfigPo po : listBrokerConfigPos) {
             Object obj = properties.get(po.getKey());
@@ -44,10 +45,10 @@ public class BrokerConfigTask {
                 properties.remove(po.getKey());
             }
         }
-        for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+        for (Map.Entry<String, String> entry : properties.entrySet()) {
             BrokerConfigPo po = new BrokerConfigPo();
-            po.setKey(entry.getKey().toString());
-            po.setValue(entry.getValue().toString());
+            po.setKey(entry.getKey());
+            po.setValue(entry.getValue());
             brokerConfigMapper.insert(po);
         }
     }

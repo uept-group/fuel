@@ -57,9 +57,9 @@ public class RBrokerService {
         return returnlist;
     }
 
-    public Properties getConfig(Integer id, String brokerAddr) {
+    public Map<String, String> getConfig(Integer id, String brokerAddr) {
         String addr = namesrvService.getAddrById(id);
-        Properties properties = client.brokerGetConfig(addr, brokerAddr);
+        Map<String, String> properties = client.brokerGetConfig(addr, brokerAddr);
         return properties;
     }
 }

@@ -1,7 +1,7 @@
 package tech.uept.fuel.admin.api;
 
 import java.util.HashMap;
-import java.util.Properties;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -34,7 +34,7 @@ public class RBrokerAction {
 
     @RequestMapping("/getConfig")
     public Object getConfig(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
-        Properties properties = rBrokerService.getConfig(nid, addr);
+        Map<String, String> properties = rBrokerService.getConfig(nid, addr);
         return properties;
     }
 
