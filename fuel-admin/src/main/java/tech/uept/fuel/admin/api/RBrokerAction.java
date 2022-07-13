@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tech.uept.fuel.admin.app.BrokerConfigTask;
 import tech.uept.fuel.admin.domain.RBrokerService;
 
 @RestController
@@ -18,6 +19,9 @@ public class RBrokerAction {
 
     @Resource
     private RBrokerService rBrokerService;
+
+    @Resource
+    private BrokerConfigTask brokerConfigTask;
 
     @RequestMapping("/update")
     public void update(@RequestBody HashMap<String, Object> map) {
@@ -37,6 +41,12 @@ public class RBrokerAction {
     @RequestMapping("/queryList")
     public Object queryList() {
         return rBrokerService.queryList();
+    }
+
+    @RequestMapping("/initConfig")
+    public Object initConfig() {
+        brokerConfigTask.doCheck();
+        return "";
     }
 
 }
