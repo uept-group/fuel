@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 
@@ -54,5 +55,11 @@ public class RBrokerService {
             }
         }
         return returnlist;
+    }
+
+    public Properties getConfig(Integer id, String brokerAddr) {
+        String addr = namesrvService.getAddrById(id);
+        Properties properties = client.brokerGetConfig(addr, brokerAddr);
+        return properties;
     }
 }

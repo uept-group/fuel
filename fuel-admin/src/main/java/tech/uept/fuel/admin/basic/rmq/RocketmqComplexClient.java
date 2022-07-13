@@ -98,6 +98,16 @@ public class RocketmqComplexClient {
         }
     }
 
+    public Properties brokerGetConfig(String namesrv, String brokerAddr) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            Properties properties = admin.getBrokerConfig(brokerAddr);
+            return properties;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<String> consumerList(String namesrv) {
         MQAdminExt admin = getAdmin(namesrv);
         Set<String> set = new HashSet<String>();

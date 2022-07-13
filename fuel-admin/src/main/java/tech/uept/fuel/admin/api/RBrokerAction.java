@@ -1,11 +1,13 @@
 package tech.uept.fuel.admin.api;
 
 import java.util.HashMap;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tech.uept.fuel.admin.domain.RBrokerService;
@@ -24,6 +26,12 @@ public class RBrokerAction {
         String key = (String) map.get("key");
         String value = (String) map.get("value");
         rBrokerService.updateBroker(id, brokerName, key, value);
+    }
+
+    @RequestMapping("/getConfig")
+    public Object getConfig(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
+        Properties properties = rBrokerService.getConfig(nid, addr);
+        return properties;
     }
 
     @RequestMapping("/queryList")
