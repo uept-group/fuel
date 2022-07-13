@@ -1,8 +1,8 @@
 <template>
   <div class="indexContainer">
     <div class="tableBox">
-      <el-row type="flex" class="row-bg" justify="end">
-        <el-button type="primary" size="medium" icon="el-icon-plus" @click="showDialog = true">新增</el-button>
+      <el-row type="flex" class="row-bg" justify="start">
+        <el-button type="primary" size="medium" icon="el-icon-plus" @click="showDialog = true">新增broker</el-button>
       </el-row>
       <el-row type="flex">
         <el-table
@@ -10,7 +10,7 @@
           :header-cell-style="{ background: '#F0F4FF', color: '#333333' }"
           :data="tableData.list"
         >
-         <el-table-column
+          <el-table-column
             align="center"
             prop="namesrvCode"
             label="namesrv"
