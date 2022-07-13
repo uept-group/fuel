@@ -128,7 +128,7 @@ export default {
     }
   }
    .row-bg {
-    padding: 10px 55px;
+    padding: 10px 40px;
     background-color: #f9fafc;
   }
   .tableBox {
