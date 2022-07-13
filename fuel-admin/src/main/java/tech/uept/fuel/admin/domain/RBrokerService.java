@@ -9,10 +9,14 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.common.protocol.body.ClusterInfo;
 import org.apache.rocketmq.common.protocol.route.BrokerData;
 import org.springframework.stereotype.Component;
 
+import tech.uept.fuel.admin.basic.mapper.BrokerConfigMapper;
+import tech.uept.fuel.admin.basic.mapper.po.BrokerConfigPo;
+import tech.uept.fuel.admin.basic.model.BrokerConfigModel;
 import tech.uept.fuel.admin.basic.model.BrokerModel;
 import tech.uept.fuel.admin.basic.model.NamesrvModel;
 import tech.uept.fuel.admin.basic.rmq.RocketmqComplexClient;
@@ -25,6 +29,9 @@ public class RBrokerService {
 
     @Resource
     private RocketmqComplexClient client;
+
+    @Resource
+    private BrokerConfigMapper brokerConfigMapper;
 
     public void updateBroker(Integer id, String brokerName, String key, String value) {
         String addr = namesrvService.getAddrById(id);
@@ -57,9 +64,38 @@ public class RBrokerService {
         return returnlist;
     }
 
-    public Map<String, String> getConfig(Integer id, String brokerAddr) {
-        String addr = namesrvService.getAddrById(id);
-        Map<String, String> properties = client.brokerGetConfig(addr, brokerAddr);
-        return properties;
+    public Map<String, String> queryConfig(Integer nid, String brokerAddr) {
+        String addr = namesrvService.getAddrById(nid);
+        Map<String, String> config = client.brokerGetConfig(addr, brokerAddr);
+        return config;
+    }
+
+    public List<BrokerConfigModel> queryNoteConfig(Integer nid, String brokerAddr) {
+        Map<String, String> properties = this.queryConfig(nid, brokerAddr);
+        List<BrokerConfigPo> listConfig = brokerConfigMapper.selectList(null);
+        List<BrokerConfigModel> returnList = new ArrayList<BrokerConfigModel>();
+
+        for (BrokerConfigPo po : listConfig) {
+            String key = po.getKey();
+            String value = properties.get(key);
+            if (StringUtils.isNotEmpty(value)) {
+                BrokerConfigModel brokerConfigModel = new BrokerConfigModel();
+                brokerConfigModel.setKey(key);
+                brokerConfigModel.setValue(value);
+                brokerConfigModel.setDefaultValue(po.getValue());
+                brokerConfigModel.setNote(po.getNote());
+                brokerConfigModel.setHotUpdate(po.getHotUpdate());
+                returnList.add(brokerConfigModel);
+                properties.remove(key);
+            }
+        }
+
+        for (Map.Entry<String, String> entry : properties.entrySet()) {
+            BrokerConfigModel brokerConfigModel = new BrokerConfigModel();
+            brokerConfigModel.setKey(entry.getKey());
+            brokerConfigModel.setValue(entry.getValue());
+            returnList.add(brokerConfigModel);
+        }
+        return returnList;
     }
 }
