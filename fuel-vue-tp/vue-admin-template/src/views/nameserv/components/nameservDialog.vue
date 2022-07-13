@@ -24,12 +24,6 @@
       <el-form-item label="地址" :label-width="formLabelWidth" prop="addr">
         <el-input v-model="ruleForm.addr" autocomplete="off" maxlength="100" />
       </el-form-item>
-      <!-- <el-form-item label="unlock" :label-width="formLabelWidth">
-            <el-select v-model="form.region" placeholder="请选择活动区域">
-              <el-option label="区域一" value="shanghai" />
-              <el-option label="区域二" value="beijing" />
-            </el-select>
-          </el-form-item> -->
       <el-form-item label="备注" :label-width="formLabelWidth" prop="desc">
         <el-input
           v-model="ruleForm.desc"

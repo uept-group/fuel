@@ -126,6 +126,7 @@ export default {
     },
     handleEdit(index, row) {
       this.showDialog = true
+      this.title = '修改名称服务'
       this.formData = { ...row }
     },
     handleDelete(index, row) {
