@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">欢迎来到{{ name }}服务平台</div>
+    <div class="dashboard-text">欢迎来到{{ name }}服务管理平台</div>
   </div>
 </template>
 

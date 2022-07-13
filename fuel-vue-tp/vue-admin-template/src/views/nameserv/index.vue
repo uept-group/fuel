@@ -39,18 +39,35 @@
         />
         <el-table-column
           label="状态"
-          width="120px"
           align="center"
+          show-overflow-tooltip
         >
           <template slot-scope="scope">
             <el-tag
-              :type=" scope.row.status === '1' ? 'warning': 'success' "
-              disable-transitions
+              :type="scope.row.status === '1' ? 'warning': 'success'"
             >
               {{ scope.row.status === '1' ? 'lock' : 'unlock' }}
             </el-tag>
           </template>
         </el-table-column>
+
+        <el-table-column
+          label="操作"
+          align="center"
+        >
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.$index, scope.row)"
+            >编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)"
+            >删除</el-button>
+          </template>
+        </el-table-column>
+
       </el-table>
     </div>
   </div>
@@ -69,8 +86,7 @@ export default {
         page: 1,
         pageSize: 10,
         total: 0
-      },
-      state: ''
+      }
     }
   },
   created() {
@@ -83,9 +99,11 @@ export default {
         this.tableData.list = res.data
       })
     },
-    getTagName(val) {
-      console.log('val', val)
-      this.state = val === 1 ? 'lock' : 'unlock'
+    handleEdit(index, row) {
+      console.log(index, row)
+    },
+    handleDelete(index, row) {
+      console.log(index, row)
     }
   }
 
