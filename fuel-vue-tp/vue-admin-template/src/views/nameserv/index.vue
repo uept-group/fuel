@@ -75,9 +75,9 @@
         </el-table>
       </el-row>
       <el-dialog
-        title="新增NameServer"
+        title="新增名称服务"
         :visible.sync="showDialog"
-        width="30%"
+        width="50%"
         :before-close="handleClose"
       >
         <el-form :model="form">
