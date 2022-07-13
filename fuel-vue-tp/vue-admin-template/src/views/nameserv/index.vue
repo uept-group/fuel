@@ -2,7 +2,7 @@
   <div class="indexContainer">
     <div class="tableBox">
       <el-row type="flex" class="row-bg" justify="end">
-        <el-button type="primary" size="medium">新增</el-button>
+        <el-button type="primary" size="medium" icon="el-icon-plus" @click="showDialog = true">新增</el-button>
       </el-row>
       <el-row type="flex">
         <el-table
@@ -61,18 +61,48 @@
             <template slot-scope="scope">
               <el-button
                 size="mini"
+                icon="el-icon-edit"
                 @click="handleEdit(scope.$index, scope.row)"
               >编辑</el-button>
               <el-button
                 size="mini"
                 type="danger"
+                icon="el-icon-delete"
                 @click="handleDelete(scope.$index, scope.row)"
               >删除</el-button>
             </template>
           </el-table-column>
-
         </el-table>
       </el-row>
+      <el-dialog
+        title="新增NameServer"
+        :visible.sync="showDialog"
+        width="30%"
+        :before-close="handleClose"
+      >
+        <el-form :model="form">
+          <el-form-item label="服务名称" :label-width="formLabelWidth">
+            <el-input v-model="form.name" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="服务编码" :label-width="formLabelWidth">
+            <el-input v-model="form.code" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="服务IP" :label-width="formLabelWidth">
+            <el-input v-model="form.ip" autocomplete="off" />
+          </el-form-item>
+          <!-- <el-form-item label="unlock" :label-width="formLabelWidth">
+            <el-select v-model="form.region" placeholder="请选择活动区域">
+              <el-option label="区域一" value="shanghai" />
+              <el-option label="区域二" value="beijing" />
+            </el-select>
+          </el-form-item> -->
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="showDialog = false">取 消</el-button>
+          <el-button type="primary" @click="showDialog = false">确 定</el-button>
+        </div>
+      </el-dialog>
+
     </div>
   </div>
 </template>
@@ -90,7 +120,19 @@ export default {
         page: 1,
         pageSize: 10,
         total: 0
-      }
+      },
+      showDialog: false,
+      form: {
+        name: '',
+        code: '',
+        ip: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+      },
+      formLabelWidth: '120px'
     }
   },
   created() {
@@ -107,6 +149,10 @@ export default {
     },
     handleDelete(index, row) {
       console.log(index, row)
+    },
+    handleClose(done) {
+      this.showDialog = false
+      done()
     }
   }
 
@@ -120,12 +166,13 @@ export default {
     }
     .el-row {
     margin-bottom: 10px;
+    border-radius: 10px;
     &:last-child {
         margin-bottom: 0;
     }
   }
    .row-bg {
-    padding: 10px 30px;
+    padding: 10px 40px;
     background-color: #f9fafc;
   }
   .tableBox {
