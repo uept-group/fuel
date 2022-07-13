@@ -35,19 +35,20 @@ public class RBrokerService {
         List<BrokerModel> returnlist = new ArrayList<>();
 
         for (NamesrvModel namesrvModel : list) {
-            ClusterInfo cinfo = client.brokerQueryInfo(namesrvModel.getAddr());
-            Collection<BrokerData> bs = cinfo.getBrokerAddrTable().values();
-            for (BrokerData b : bs) {
-                HashMap<Long, String> mapAddrs = b.getBrokerAddrs();
-                for (Map.Entry<Long, String> m : mapAddrs.entrySet()) {
+            ClusterInfo clusterInfo = client.brokerQueryInfo(namesrvModel.getAddr());
+            Collection<BrokerData> brokerDataList = clusterInfo.getBrokerAddrTable().values();
+            for (BrokerData brokerData : brokerDataList) {
+                HashMap<Long, String> mapNoAddr = brokerData.getBrokerAddrs();
+                for (Map.Entry<Long, String> entry : mapNoAddr.entrySet()) {
                     BrokerModel brokerModel = new BrokerModel();
-                    long no = m.getKey();
-                    String addr = m.getValue();
+                    long no = entry.getKey();
+                    String addr = entry.getValue();
                     brokerModel.setNo((int) no);
                     brokerModel.setAddress(addr);
-                    brokerModel.setName(b.getBrokerName());
+                    brokerModel.setName(brokerData.getBrokerName());
                     brokerModel.setNamesrvCode(namesrvModel.getCode());
                     brokerModel.setNamesrvId(namesrvModel.getId());
+                    brokerModel.setCluster(brokerData.getCluster());
                     returnlist.add(brokerModel);
                 }
             }
