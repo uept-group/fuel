@@ -1,7 +1,7 @@
 package tech.uept.fuel.admin.api;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tech.uept.fuel.admin.app.BrokerConfigTask;
+import tech.uept.fuel.admin.basic.model.BrokerConfigModel;
 import tech.uept.fuel.admin.domain.RBrokerService;
 
 @RestController
@@ -34,7 +35,7 @@ public class RBrokerAction {
 
     @RequestMapping("/getConfig")
     public Object getConfig(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
-        Map<String, String> properties = rBrokerService.getConfig(nid, addr);
+        List<BrokerConfigModel> properties = rBrokerService.queryNoteConfig(nid, addr);
         return properties;
     }
 

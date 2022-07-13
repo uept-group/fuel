@@ -2,7 +2,6 @@ package tech.uept.fuel.admin.app;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.annotation.Resource;
 
@@ -36,7 +35,7 @@ public class BrokerConfigTask {
             return;
         }
         NamesrvModel n = list.get(0);
-        Map<String, String> properties = brokerService.getConfig(n.getId(),
+        Map<String, String> properties = brokerService.queryConfig(n.getId(),
                 brokerService.queryList().get(0).getAddress());
         List<BrokerConfigPo> listBrokerConfigPos = brokerConfigMapper.selectList(null);
         for (BrokerConfigPo po : listBrokerConfigPos) {

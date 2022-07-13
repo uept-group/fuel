@@ -167,7 +167,11 @@ public class RocketmqComplexClient {
             if (admin != null) {
                 return admin;
             }
-            DefaultMQAdminExt defaultAdmin = new DefaultMQAdminExt("fuel-admin");
+            String name = "fuel-admin:" + namesrv;
+
+            DefaultMQAdminExt defaultAdmin = new DefaultMQAdminExt(name);
+            defaultAdmin.setInstanceName(name);
+
             defaultAdmin.setNamesrvAddr(namesrv);
             try {
                 defaultAdmin.start();
