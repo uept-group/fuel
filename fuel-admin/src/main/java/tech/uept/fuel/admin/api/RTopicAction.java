@@ -16,22 +16,22 @@ public class RTopicAction {
     private RTopicService rTopicService;
 
     @RequestMapping("/list")
-    public Object list(@RequestParam(name = "id") Integer id) {
+    public Object list(@RequestParam(name = "nid") Integer id) {
         return rTopicService.list(id);
     }
 
     @RequestMapping("/status")
-    public Object status(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
+    public Object status(@RequestParam(name = "nid") Integer id, @RequestParam(name = "topic") String topic) {
         return rTopicService.status(id, topic);
     }
 
     @RequestMapping("/route")
-    public Object route(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
+    public Object route(@RequestParam(name = "nid") Integer id, @RequestParam(name = "topic") String topic) {
         return rTopicService.route(id, topic);
     }
 
     @RequestMapping("/consumer")
-    public Object consumer(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
+    public Object consumer(@RequestParam(name = "nid") Integer id, @RequestParam(name = "topic") String topic) {
         return rTopicService.consumer(id, topic);
     }
 
