@@ -79,6 +79,7 @@
       :v-if="showDialog"
       :visible="showDialog"
       :form-data="formData"
+      :btn-name="btnName"
       @on-config-cancel="configCancelCallback"
       @on-save-nameserv="saveNameservCallback"
     />
@@ -104,10 +105,12 @@ export default {
       },
       showDialog: false,
       title: '新增名称服务',
+      btnName: '立即创建',
       formData: {
         id: '',
         addr: '',
         name: '',
+        code: '',
         note: ''
       }
     }
@@ -127,6 +130,7 @@ export default {
     handleEdit(index, row) {
       this.showDialog = true
       this.title = '修改名称服务'
+      this.btnName = '保存修改'
       this.formData = { ...row }
     },
     handleDelete(index, row) {
@@ -158,16 +162,29 @@ export default {
       this.showDialog = false
     },
     saveNameservCallback(ruleForm) {
-      addNameServ(ruleForm).then(res => {
-        if (res.code === 20000) {
-          this.$message({
-            showClose: true,
-            message: '创建成功',
-            type: 'success'
-          })
-          this.fetchData()
-        }
-      })
+      if (ruleForm.id) {
+        modNameServ(ruleForm).then(res => {
+          if (res.code === 20000) {
+            this.$message({
+              showClose: true,
+              message: '修改成功',
+              type: 'success'
+            })
+            this.fetchData()
+          }
+        })
+      } else {
+        addNameServ(ruleForm).then(res => {
+          if (res.code === 20000) {
+            this.$message({
+              showClose: true,
+              message: '创建成功',
+              type: 'success'
+            })
+            this.fetchData()
+          }
+        })
+      }
       this.showDialog = false
     }
   }
