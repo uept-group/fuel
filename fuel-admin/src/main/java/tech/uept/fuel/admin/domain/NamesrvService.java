@@ -42,7 +42,11 @@ public class NamesrvService {
     }
 
     public String getAddrById(Integer id) {
-        return namesrvMapper.selectById(id).getAddr();
+        NamesrvPo po = namesrvMapper.selectById(id);
+        if (po == null) {
+            throw new BizException("id not find, please check");
+        }
+        return po.getAddr();
     }
 
     public void delete(Integer id) {
