@@ -1,9 +1,6 @@
 <template>
   <div class="indexContainer">
     <div class="tableBox">
-      <el-row type="flex" class="row-bg" justify="start">
-        
-      </el-row>
       <el-row type="flex">
         <el-table
           stripe
@@ -73,7 +70,7 @@
           </el-table-column>
         </el-table>
       </el-row>
-      
+
       <el-dialog
         title="新增NameServer"
         :visible.sync="showDialog"
