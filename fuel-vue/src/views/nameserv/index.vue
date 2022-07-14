@@ -156,6 +156,8 @@ export default {
       })
     },
     handleShowDialog(val) {
+      this.title = '新增名称服务'
+      this.btnName = '立即创建'
       this.showDialog = val
     },
     configCancelCallback() {
