@@ -113,4 +113,10 @@ public class RBrokerService {
         }
         return returnList;
     }
+
+    public Map<String, String> queryStats(Integer nid, String brokerAddr) {
+        String addr = namesrvService.getAddrById(nid);
+        Map<String, String> config = client.brokerGetConfig(addr, brokerAddr);
+        return config;
+    }
 }

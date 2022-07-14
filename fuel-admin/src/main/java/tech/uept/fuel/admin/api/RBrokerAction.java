@@ -2,6 +2,7 @@ package tech.uept.fuel.admin.api;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -37,6 +38,12 @@ public class RBrokerAction {
     public Object findConfig(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
         List<BrokerConfigModel> properties = rBrokerService.queryNoteConfig(nid, addr);
         return properties;
+    }
+
+    @RequestMapping("/findStats")
+    public Object findStats(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
+        Map<String, String> map = rBrokerService.queryStats(nid, addr);
+        return map;
     }
 
     @RequestMapping("/queryList")
