@@ -59,7 +59,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/manage/nameserv',
     name: 'Manage',
-    meta: { title: '服务管理', icon: 'el-icon-s-help' },
+    meta: { title: '后台管理', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'nameserv',
@@ -74,10 +74,38 @@ export const constantRoutes = [
         meta: { title: 'broker', icon: 'tree' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
+        path: 'topic',
+        name: 'topic',
         component: () => import('@/views/consumegroup/index'),
-        meta: { title: '消费组', icon: 'table' }
+        meta: { title: 'topic', icon: 'table' }
+      }
+      ,
+      {
+        path: 'consumer',
+        name: 'consumer',
+        component: () => import('@/views/consumegroup/index'),
+        meta: { title: '消费者', icon: 'table' }
+      }
+      ,
+      {
+        path: 'producer',
+        name: 'producer',
+        component: () => import('@/views/consumegroup/index'),
+        meta: { title: '生产者', icon: 'table' }
+      }
+      ,
+      {
+        path: 'message',
+        name: 'message',
+        component: () => import('@/views/consumegroup/index'),
+        meta: { title: '消息', icon: 'table' }
+      }
+      ,
+      {
+        path: 'MessageTrace',
+        name: 'MessageTrace',
+        component: () => import('@/views/consumegroup/index'),
+        meta: { title: '消息链路', icon: 'table' }
       }
     ]
   },

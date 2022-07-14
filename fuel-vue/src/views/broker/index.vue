@@ -2,7 +2,7 @@
   <div class="indexContainer">
     <div class="tableBox">
       <el-row type="flex" class="row-bg" justify="start">
-        <el-button type="primary" size="medium" icon="el-icon-plus" @click="showDialog = true">新增broker</el-button>
+        
       </el-row>
       <el-row type="flex">
         <el-table
@@ -63,16 +63,17 @@
                 type="text"
                 icon="el-icon-edit"
                 @click="handleEdit(scope.$index, scope.row)"
-              >编辑</el-button>
+              >配置</el-button>
               <el-button
                 type="text"
                 icon="el-icon-delete"
                 @click="handleDelete(scope.$index, scope.row)"
-              >删除</el-button>
+              >状态</el-button>
             </template>
           </el-table-column>
         </el-table>
       </el-row>
+      
       <el-dialog
         title="新增NameServer"
         :visible.sync="showDialog"
