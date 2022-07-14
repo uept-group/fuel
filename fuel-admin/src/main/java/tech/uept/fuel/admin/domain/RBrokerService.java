@@ -97,7 +97,7 @@ public class RBrokerService {
                 BrokerConfigModel brokerConfigModel = new BrokerConfigModel();
                 brokerConfigModel.setKey(key);
                 brokerConfigModel.setValue(value);
-                brokerConfigModel.setDefaultValue(po.getValue());
+                brokerConfigModel.setDefaultValue(po.getDefaultValue());
                 brokerConfigModel.setNote(po.getNote());
                 brokerConfigModel.setHotUpdate(po.getHotUpdate());
                 returnList.add(brokerConfigModel);

@@ -47,7 +47,7 @@ public class BrokerConfigTask {
         for (Map.Entry<String, String> entry : properties.entrySet()) {
             BrokerConfigPo po = new BrokerConfigPo();
             po.setKey(entry.getKey());
-            po.setValue(entry.getValue());
+            po.setDefaultValue(entry.getValue());
             brokerConfigMapper.insert(po);
         }
     }
