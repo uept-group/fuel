@@ -55,7 +55,7 @@ CREATE TABLE `user` (
 CREATE TABLE `broker_config`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '属性',
-  `value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '默认value',
+  `default_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '默认value',
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '备注',
   `sort_no` int(10) NULL DEFAULT 0 COMMENT '排序编号',
   `hot_update` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '是否热更新: yes, no',

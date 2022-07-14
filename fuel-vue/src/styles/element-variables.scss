@@ -1,31 +1,108 @@
-/**
-* I think element-ui's default theme color is too light for long-term use.
-* So I modified the default color and you can modify it to your liking.
-**/
+/* 主题色 */
+$--color-primary: #3f68d4;
 
-/* theme color */
-$--color-primary: #1890ff;
-$--color-success: #13ce66;
-$--color-warning: #ffba00;
-$--color-danger: #ff4949;
-// $--color-info: #1E1E1E;
+:root {
+  --color-primary: #{$--color-primary};
+  --header-color: #254480;
+  --slide-menu-active-color: #4068D4;
+}
 
-$--button-font-weight: 400;
+$--input-height: 32px;
+$--input-border-radius: 0px;
 
-// $--color-text-regular: #1f2d3d;
+$--table-header-background-color: #eef4fc;
+$--table-row-hover-background-color: #eef4fc;
+$--table-header-color: #666666;
+$--table-text-color: #333333;
 
-$--border-color-light: #dfe4ed;
-$--border-color-lighter: #e6ebf5;
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
 
-$--table-border: 1px solid #dfe6ec;
+@import '~element-ui/packages/theme-chalk/src/index';
 
-/* icon font path, required */
-$--font-path: "~element-ui/lib/theme-chalk/fonts";
+@font-face {
+  font-family: 'SYZT'; //重命名字体名
+  src: url('../assets/font/SourceHanSansCN-Normal.otf'); //引入字体
+  font-weight: normal;
+  font-style: normal;
+}
 
-@import "~element-ui/packages/theme-chalk/src/index";
+/* 面包屑导航 */
+.el-navigation {
+  padding: 17px 20px;
+  // width: calc( 100% - 41px);
+  width: 100%;
+  border-bottom: 1px solid #e8e8e8; // height: 40px;
+  background-color: #fff;
+  ::v-deep .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+    font-size: 14px;
+    font-weight: 400;
+    color: #323233;
+  }
+  ::v-deep .el-breadcrumb__item .is-link {
+    font-size: 14px;
+    font-weight: 400;
+    color: #969799;
+  }
+}
+.el-button:not(.el-button--text),
+.el-button.el-button--primary {
+  height: 30px;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  padding: 4px 16px;
+}
 
-// the :export directive is the magic sauce for webpack
-// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
-:export {
-  theme: $--color-primary;
+.el-button.el-button--primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.el-button--primary.is-plain {
+  color: #3f68d4;
+  background: #ecf0fb;
+  border-color: #b2c3ee;
+}
+
+.el-breadcrumb__item .el-breadcrumb__inner {
+  color: #333333 !important;
+}
+.el-breadcrumb__item .is-link {
+  color: #333333;
+  font-weight: 500 !important;
+}
+.el-breadcrumb__separator {
+  color: #333333;
+  font-weight: 100;
+}
+.el-breadcrumb__item:last-child .el-breadcrumb__inner {
+  color: #333333;
+  font-weight: bold !important;
+}
+
+/* loading */
+.el-loading-spinner .circular {
+  display: none;
+}
+.el-loading-spinner {
+  width: 80px;
+  height: 80px;
+  //margin:-40px auto;
+  background: url(../../public/loading.gif) no-repeat rgba(0, 0, 0, 0.7);
+  background-size: 100% 100%;
+  position: relative;
+  left: calc(50% - 40px);
+  top: calc(50% - 40px);
+}
+
+.el-pager li.active {
+  background-color: #ffffff;
+}
+
+/* 必填项样式 */
+.el_label span {
+  color: red;
+  margin-right: 5px;
 }

@@ -14,8 +14,8 @@ public class BrokerConfigPo {
     @TableField("`key`")
     private String key;
 
-    @TableField("`value`")
-    private String value;
+    @TableField("`default_value`")
+    private String defaultValue;
 
     private String note;
 
@@ -41,12 +41,12 @@ public class BrokerConfigPo {
         this.key = key;
     }
 
-    public String getValue() {
-        return value;
+    public String getDefaultValue() {
+        return defaultValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
     }
 
     public String getNote() {

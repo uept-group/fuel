@@ -33,8 +33,8 @@ public class RBrokerAction {
         rBrokerService.updateBroker(id, brokerName, key, value);
     }
 
-    @RequestMapping("/getConfig")
-    public Object getConfig(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
+    @RequestMapping("/findConfig")
+    public Object findConfig(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
         List<BrokerConfigModel> properties = rBrokerService.queryNoteConfig(nid, addr);
         return properties;
     }
