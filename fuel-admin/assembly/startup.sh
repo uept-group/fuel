@@ -1,3 +1,1 @@
-#!/bin/bash
-
-nohup java -cp ../config -Dserver.port=9050 -jar fuel-admin-1.8.jar &
+java -Dserver.port=10000 -jar ./lib/fuel-admin-1.8.jar
