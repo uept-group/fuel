@@ -58,58 +58,44 @@
             <template slot-scope="scope">
               <el-button
                 type="text"
-                icon="el-icon-edit"
-                @click="handleEdit(scope.$index, scope.row)"
+                @click="handleConfig(scope.$index, scope.row)"
               >配置</el-button>
               <el-button
                 type="text"
-                icon="el-icon-delete"
-                @click="handleDelete(scope.$index, scope.row)"
+                @click="handleState(scope.$index, scope.row)"
               >状态</el-button>
             </template>
           </el-table-column>
         </el-table>
       </el-row>
-
-      <el-dialog
-        title="新增NameServer"
-        :visible.sync="showDialog"
-        width="30%"
-        :before-close="handleClose"
-      >
-        <el-form :model="form">
-          <el-form-item label="服务名称" :label-width="formLabelWidth">
-            <el-input v-model="form.name" autocomplete="off" />
-          </el-form-item>
-          <el-form-item label="服务编码" :label-width="formLabelWidth">
-            <el-input v-model="form.code" autocomplete="off" />
-          </el-form-item>
-          <el-form-item label="服务IP" :label-width="formLabelWidth">
-            <el-input v-model="form.ip" autocomplete="off" />
-          </el-form-item>
-          <!-- <el-form-item label="unlock" :label-width="formLabelWidth">
-            <el-select v-model="form.region" placeholder="请选择活动区域">
-              <el-option label="区域一" value="shanghai" />
-              <el-option label="区域二" value="beijing" />
-            </el-select>
-          </el-form-item> -->
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="showDialog = false">取 消</el-button>
-          <el-button type="primary" @click="showDialog = false">确 定</el-button>
-        </div>
-      </el-dialog>
-
+      <BrokerConfigDialog
+        :v-if="showConfigDialog"
+        :visible="showConfigDialog"
+        :config-data="configData"
+        @on-config-cancel="handleConfigClose"
+      />
+      <BrokerStateDialog
+        :v-if="showStateDialog"
+        :visible="showStateDialog"
+        :state-data="stateData"
+        @on-config-cancel="handleStateClose"
+      />
     </div>
   </div>
 </template>
 
 <script>
 
-import { getBrokerList } from '@/api/broker'
+import { getBrokerList, getBrokerConfig, getBrokerState } from '@/api/broker'
+import BrokerConfigDialog from './components/brokerConfigDiaglog.vue'
+import BrokerStateDialog from './components/brokerStateDialog.vue'
 
 export default {
   name: 'Nameserve',
+  components: {
+    BrokerConfigDialog,
+    BrokerStateDialog
+  },
   data() {
     return {
       tableData: {
@@ -118,17 +104,10 @@ export default {
         pageSize: 10,
         total: 0
       },
-      showDialog: false,
-      form: {
-        name: '',
-        code: '',
-        ip: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      },
+      showConfigDialog: false,
+      showStateDialog: false,
+      configData: [],
+      stateData: [],
       formLabelWidth: '120px'
     }
   },
@@ -141,15 +120,23 @@ export default {
         this.tableData.list = res.data
       })
     },
-    handleEdit(index, row) {
-      console.log(index, row)
+    handleConfig(index, row) {
+      getBrokerConfig({ ...row }).then(res => {
+        this.configData = res.data
+      })
+      this.showConfigDialog = true
     },
-    handleDelete(index, row) {
-      console.log(index, row)
+    handleState(index, row) {
+      getBrokerState({ ...row }).then(res => {
+        this.stateData = res.data
+      })
+      this.showStateDialog = true
     },
-    handleClose(done) {
-      this.showDialog = false
-      done()
+    handleConfigClose() {
+      this.showConfigDialog = false
+    },
+    handleStateClose() {
+      this.showStateDialog = false
     }
   }
 

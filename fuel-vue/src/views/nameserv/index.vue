@@ -89,7 +89,6 @@
 
 import { getNameServList, addNameServ, delNameServ, modNameServ } from '@/api/nameserv'
 import NameservDialog from './components/nameservDialog.vue'
-import { errorHandler } from '@/utils/index'
 
 export default {
   name: 'Nameserve',
@@ -175,10 +174,6 @@ export default {
             })
             this.fetchData()
           }
-          /**
-           * 错误码拦截
-           */
-          errorHandler(res)
         })
       } else {
         addNameServ(ruleForm).then(res => {
@@ -190,11 +185,6 @@ export default {
             })
             this.fetchData()
           }
-          /**
-           * 错误码拦截
-           */
-          console.log('error', res)
-          errorHandler(res)
         })
       }
       this.showDialog = false
