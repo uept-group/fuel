@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson.JSONObject;
+import com.beust.jcommander.internal.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.common.protocol.body.ClusterInfo;
 import org.apache.rocketmq.common.protocol.route.BrokerData;
@@ -21,6 +23,7 @@ import tech.uept.fuel.admin.basic.model.BrokerConfigModel;
 import tech.uept.fuel.admin.basic.model.BrokerModel;
 import tech.uept.fuel.admin.basic.model.NamesrvModel;
 import tech.uept.fuel.admin.basic.rmq.RocketmqComplexClient;
+import tech.uept.fuel.admin.bean.BrokerState;
 
 @Component
 public class RBrokerService {
@@ -114,9 +117,16 @@ public class RBrokerService {
         return returnList;
     }
 
-    public Map<String, String> queryStats(Integer nid, String brokerAddr) {
+    public List<BrokerState> queryStats(Integer nid, String brokerAddr) {
         String addr = namesrvService.getAddrById(nid);
+        List<BrokerState> returnList = Lists.newArrayList();
         Map<String, String> config = client.brokerGetConfig(addr, brokerAddr);
-        return config;
+        for (String key: config.keySet()) {
+            BrokerState brokerState = new BrokerState();
+            brokerState.setKey(key);
+            brokerState.setValue(config.getOrDefault(key, ""));
+            returnList.add(brokerState);
+        }
+        return returnList;
     }
 }

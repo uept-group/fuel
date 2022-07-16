@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tech.uept.fuel.admin.app.BrokerConfigTask;
 import tech.uept.fuel.admin.basic.model.BrokerConfigModel;
+import tech.uept.fuel.admin.bean.BrokerState;
 import tech.uept.fuel.admin.domain.RBrokerService;
 
 @RestController
@@ -41,9 +42,8 @@ public class RBrokerAction {
     }
 
     @RequestMapping("/findStats")
-    public Object findStats(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
-        Map<String, String> map = rBrokerService.queryStats(nid, addr);
-        return map;
+    public List<BrokerState> findStats(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
+        return rBrokerService.queryStats(nid, addr);
     }
 
     @RequestMapping("/queryList")
