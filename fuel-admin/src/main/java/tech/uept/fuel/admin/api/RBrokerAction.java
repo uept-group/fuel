@@ -6,10 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import tech.uept.fuel.admin.app.BrokerConfigTask;
 import tech.uept.fuel.admin.basic.model.BrokerConfigModel;
@@ -26,7 +23,7 @@ public class RBrokerAction {
     @Resource
     private BrokerConfigTask brokerConfigTask;
 
-    @RequestMapping("/update")
+    @PostMapping("/update")
     public void update(@RequestBody HashMap<String, Object> map) {
         Integer id = (Integer) map.get("id");
         String brokerName = (String) map.get("brokerName");
@@ -35,23 +32,23 @@ public class RBrokerAction {
         rBrokerService.updateBroker(id, brokerName, key, value);
     }
 
-    @RequestMapping("/findConfig")
+    @GetMapping("/findConfig")
     public Object findConfig(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
         List<BrokerConfigModel> properties = rBrokerService.queryNoteConfig(nid, addr);
         return properties;
     }
 
-    @RequestMapping("/findStats")
+    @GetMapping("/findStats")
     public List<BrokerState> findStats(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
         return rBrokerService.queryStats(nid, addr);
     }
 
-    @RequestMapping("/queryList")
+    @GetMapping("/queryList")
     public Object queryList() {
         return rBrokerService.queryList();
     }
 
-    @RequestMapping("/initConfig")
+    @GetMapping("/initConfig")
     public Object initConfig() {
         brokerConfigTask.doCheck();
         return "";
