@@ -2,6 +2,7 @@ package tech.uept.fuel.admin.api;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,23 +16,23 @@ public class RTopicAction {
     @Resource
     private RTopicService rTopicService;
 
-    @RequestMapping("/list")
-    public Object list(@RequestParam(name = "id") Integer id) {
+    @GetMapping("/list")
+    public Object list(@RequestParam(name = "nid") Integer id) {
         return rTopicService.list(id);
     }
 
-    @RequestMapping("/status")
-    public Object status(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
+    @GetMapping("/status")
+    public Object status(@RequestParam(name = "nid") Integer id, @RequestParam(name = "topic") String topic) {
         return rTopicService.status(id, topic);
     }
 
-    @RequestMapping("/route")
-    public Object route(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
+    @GetMapping("/route")
+    public Object route(@RequestParam(name = "nid") Integer id, @RequestParam(name = "topic") String topic) {
         return rTopicService.route(id, topic);
     }
 
-    @RequestMapping("/consumer")
-    public Object consumer(@RequestParam(name = "id") Integer id, @RequestParam(name = "topic") String topic) {
+    @GetMapping("/consumer")
+    public Object consumer(@RequestParam(name = "nid") Integer id, @RequestParam(name = "topic") String topic) {
         return rTopicService.consumer(id, topic);
     }
 

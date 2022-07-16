@@ -15,6 +15,7 @@ import org.apache.rocketmq.common.admin.TopicStatsTable;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.common.protocol.body.ClusterInfo;
 import org.apache.rocketmq.common.protocol.body.GroupList;
+import org.apache.rocketmq.common.protocol.body.KVTable;
 import org.apache.rocketmq.common.protocol.body.ProducerConnection;
 import org.apache.rocketmq.common.protocol.body.SubscriptionGroupWrapper;
 import org.apache.rocketmq.common.protocol.body.TopicList;
@@ -108,6 +109,17 @@ public class RocketmqComplexClient {
                 map.put((String) entry.getKey(), (String) entry.getValue());
             }
             return map;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Map<String, String> brokerGetStats(String namesrv, String brokerAddr) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            Map<String, String> map = new HashMap<String, String>();
+            KVTable kvTable = admin.fetchBrokerRuntimeStats(brokerAddr);
+            return kvTable.getTable();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

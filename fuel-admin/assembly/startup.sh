@@ -1,0 +1,1 @@
+java -Dserver.port=10000 -jar ./lib/fuel-admin-1.8.jar

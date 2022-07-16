@@ -1,12 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
-	<property name="LOG_FILE" value="${user.home}/logs/fuel/fuel.log}" />
-	<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
-	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
-	
-	<root level="INFO">
-		<appender-ref ref="FILE" />
-		<appender-ref ref="CONSOLE" />
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true" scanPeriod="10 seconds">
+
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+	<conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+	<conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+	<property name="CONSOLE_LOG_PATTERN"
+			  value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(--%line){gray} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+	<property name="FILE_LOG_PATTERN"
+			  value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} %clr(--%line){gray} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+	<appender name="STDOUT"
+			  class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>
+				%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint}%clr([%15.15t]){faint} %clr(%-20.40logger{39}){cyan} %clr(--%line){gray} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+			</pattern>
+		</layout>
+	</appender>
+
+	<appender name="FILE"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				logs/fuel_admin.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<maxHistory>180</maxHistory>
+		</rollingPolicy>
+
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %line : %msg%n
+			</Pattern>
+			<!--<jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">-->
+			<!--&lt;!&ndash; prettyPrint is probably ok in dev, but usually not ideal in production: &ndash;&gt;-->
+			<!--<prettyPrint>false</prettyPrint>-->
+			<!--</jsonFormatter>-->
+			<!--<timestampFormatTimezoneId>UTC</timestampFormatTimezoneId>-->
+		</layout>
+	</appender>
+
+	<root>
+		<level value="INFO"/>
+		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="FILE"/>
 	</root>
+
 </configuration>

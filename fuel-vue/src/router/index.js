@@ -78,29 +78,25 @@ export const constantRoutes = [
         name: 'topic',
         component: () => import('@/views/consumegroup/index'),
         meta: { title: 'topic', icon: 'table' }
-      }
-      ,
+      },
       {
         path: 'consumer',
         name: 'consumer',
         component: () => import('@/views/consumegroup/index'),
         meta: { title: '消费者', icon: 'table' }
-      }
-      ,
+      },
       {
         path: 'producer',
         name: 'producer',
         component: () => import('@/views/consumegroup/index'),
         meta: { title: '生产者', icon: 'table' }
-      }
-      ,
+      },
       {
         path: 'message',
         name: 'message',
         component: () => import('@/views/consumegroup/index'),
         meta: { title: '消息', icon: 'table' }
-      }
-      ,
+      },
       {
         path: 'MessageTrace',
         name: 'MessageTrace',
