@@ -53,7 +53,7 @@ public class RTopicService {
         int first = (pageNo - 1) * pageSize;
         int last = pageNo * pageSize;
         if (list.size() < first) {
-            return null;
+            throw new RuntimeException("pageNo or PageSize error");
         }
         if (list.size() < last) {
             last = list.size();
@@ -62,7 +62,7 @@ public class RTopicService {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("total", list.size());
         map.put("list", list2);
-        return null;
+        return map;
     }
 
 }
