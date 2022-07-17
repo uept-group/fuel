@@ -1,6 +1,8 @@
 package tech.uept.fuel.admin.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -44,6 +46,23 @@ public class RTopicService {
         String addr = namesrvService.getAddrById(id);
         List<String> consumerList = client.topicQueryConsumer(addr, topic);
         return consumerList;
+    }
+
+    public Object list(Integer id, Integer pageNo, Integer pageSize) {
+        List<String> list = this.list(0);
+        int first = (pageNo - 1) * pageSize;
+        int last = pageNo * pageSize;
+        if (list.size() < first) {
+            return null;
+        }
+        if (list.size() < last) {
+            last = list.size();
+        }
+        List<String> list2 = list.subList(first, last);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("total", list.size());
+        map.put("list", list2);
+        return null;
     }
 
 }

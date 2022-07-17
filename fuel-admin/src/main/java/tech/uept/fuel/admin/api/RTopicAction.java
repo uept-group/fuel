@@ -21,6 +21,12 @@ public class RTopicAction {
         return rTopicService.list(id);
     }
 
+    @GetMapping("/list2")
+    public Object list2(@RequestParam(name = "nid") Integer id, @RequestParam(name = "pageNo") Integer pageNo,
+            @RequestParam(name = "pageSize") Integer pageSize) {
+        return rTopicService.list(id, pageNo, pageSize);
+    }
+
     @GetMapping("/status")
     public Object status(@RequestParam(name = "nid") Integer id, @RequestParam(name = "topic") String topic) {
         return rTopicService.status(id, topic);
