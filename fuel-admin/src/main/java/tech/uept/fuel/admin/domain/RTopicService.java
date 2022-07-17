@@ -8,6 +8,7 @@ import org.apache.rocketmq.common.admin.TopicStatsTable;
 import org.apache.rocketmq.common.protocol.route.TopicRouteData;
 import org.springframework.stereotype.Service;
 
+import tech.uept.fuel.admin.basic.cache.LocalCache;
 import tech.uept.fuel.admin.basic.rmq.RocketmqComplexClient;
 
 @Service
@@ -18,6 +19,9 @@ public class RTopicService {
 
     @Resource
     private RocketmqComplexClient client;
+
+    @Resource
+    private LocalCache localCache;
 
     public List<String> list(int id) {
         String addr = namesrvService.getAddrById(id);
