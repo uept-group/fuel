@@ -27,19 +27,23 @@ public class RConsumerService {
 
     private static final String CACHE_KEY_PRE = "consumer:";
 
-    public List<String> list(Integer id) {
-        List<String> list = localCache.get(CACHE_KEY_PRE + id);
+    public List<String> list(Integer namesrvId) {
+        List<String> list = localCache.get(genKey(namesrvId));
         if (list != null) {
             return list;
         }
-        String nAdddr = namesrvService.getAddrById(id);
+        String nAdddr = namesrvService.getAddrById(namesrvId);
         list = client.consumerList(nAdddr);
-        localCache.put(CACHE_KEY_PRE + id, list, 1000 * 60 * 5);
+        localCache.put(genKey(namesrvId), list, 1000 * 60 * 5);
         return list;
     }
 
-    public Object findPage(Integer id, Integer pageNo, Integer pageSize, String name) {
-        List<String> list = this.list(id);
+    public String genKey(Integer id) {
+        return CACHE_KEY_PRE + id;
+    }
+
+    public Object findPage(Integer namesrvId, Integer pageNo, Integer pageSize, String name) {
+        List<String> list = this.list(namesrvId);
         if (StringUtils.isNotBlank(name)) {
             List<String> list2 = new ArrayList<>();
             for (String s : list) {

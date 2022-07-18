@@ -20,9 +20,12 @@ public class PageUtils {
             return myPage;
         }
         int start = (pageNo - 1) * pageSize;
+        if (start > list.size()) {
+            return myPage;
+        }
         int end = pageNo * pageSize;
         if (list.size() < end) {
-            end=list.size();
+            end = list.size();
         }
         myPage.setTotal(list.size());
         myPage.setList(list.subList(start, end));
