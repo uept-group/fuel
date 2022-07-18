@@ -4,27 +4,26 @@
       :title="title"
       :visible.sync="isShowForm"
       :before-close="beforeClose"
-      width="60%"
+      width="45%"
       custom-class="dialogContainer"
     >
-      <el-row type="flex">
+      <el-row type="flex" gutter="center">
         <el-table
           stripe
           :header-cell-style="{ background: '#F0F4FF', color: '#333333' }"
           :data="tableData"
+          style="width: 100%"
         >
           <el-table-column
             align="center"
             prop="key"
             label="type"
-            width="400px"
             show-overflow-tooltip
           />
           <el-table-column
             align="center"
             prop="value"
             label="value"
-            width="400px"
             show-overflow-tooltip
           />
         </el-table>
@@ -58,8 +57,8 @@ export default {
   },
   data() {
     return {
-      formLabelWidth: '120px',
-      btnLabelWidth: '120px',
+      formLabelWidth: '50px',
+      btnLabelWidth: '50px',
       isShowForm: false,
       tableData: [],
       title: 'broker状态信息'
