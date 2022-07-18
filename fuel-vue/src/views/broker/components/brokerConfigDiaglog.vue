@@ -12,26 +12,24 @@
           stripe
           :header-cell-style="{ background: '#F0F4FF', color: '#333333' }"
           :data="tableData"
+          style="width: 100%"
         >
           <el-table-column
             align="center"
             prop="key"
             label="key"
-            width="250px"
             show-overflow-tooltip
           />
           <el-table-column
             align="center"
             prop="value"
             label="value"
-            width="150px"
             show-overflow-tooltip
           />
           <el-table-column
             align="center"
             prop="defaultValue"
             label="defaultValue"
-            width="150px"
             show-overflow-tooltip
           />
           <el-table-column
@@ -77,8 +75,6 @@ export default {
   },
   data() {
     return {
-      formLabelWidth: '120px',
-      btnLabelWidth: '120px',
       isShowForm: false,
       tableData: [],
       title: 'broker配置信息'
