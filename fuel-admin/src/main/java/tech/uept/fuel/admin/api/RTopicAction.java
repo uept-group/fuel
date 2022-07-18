@@ -21,9 +21,9 @@ public class RTopicAction {
         return rTopicService.list(id);
     }
 
-    @GetMapping("/list2")
-    public Object list2(@RequestParam(name = "nid") Integer id, @RequestParam(name = "pageNo") Integer pageNo,
-            @RequestParam(name = "pageSize") Integer pageSize) {
+    @GetMapping("/findByPage")
+    public Object findByPage(@RequestParam(name = "nid") Integer id, @RequestParam(name = "pageNo") Integer pageNo,
+            @RequestParam(name = "pageSize") Integer pageSize, @RequestParam(name = "name") String name) {
         return rTopicService.list(id, pageNo, pageSize);
     }
 
