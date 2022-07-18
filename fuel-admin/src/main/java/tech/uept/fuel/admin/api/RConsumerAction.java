@@ -19,4 +19,10 @@ public class RConsumerAction {
     public Object list(@RequestParam(name = "nid") Integer id) {
         return rConsumerService.list(id);
     }
+
+    @RequestMapping("/findPage")
+    public Object findPage(@RequestParam(name = "nid") Integer id, @RequestParam(name = "pageNo") Integer pageNo,
+            @RequestParam(name = "pageSize") Integer pageSize, @RequestParam(name = "name") String name) {
+        return rConsumerService.findPage(id, pageNo, pageSize, name);
+    }
 }
