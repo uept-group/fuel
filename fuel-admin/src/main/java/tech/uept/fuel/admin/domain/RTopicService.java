@@ -49,7 +49,7 @@ public class RTopicService {
     }
 
     public Object list(Integer id, Integer pageNo, Integer pageSize) {
-        List<String> list = this.list(0);
+        List<String> list = this.list(id);
         int first = (pageNo - 1) * pageSize;
         int last = pageNo * pageSize;
         if (list.size() < first) {
