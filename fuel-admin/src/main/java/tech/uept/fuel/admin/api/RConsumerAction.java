@@ -25,4 +25,9 @@ public class RConsumerAction {
             @RequestParam(name = "pageSize") Integer pageSize, @RequestParam(name = "name") String name) {
         return rConsumerService.findPage(id, pageNo, pageSize, name);
     }
+
+    @RequestMapping("/findConfig")
+    public Object findPage(@RequestParam(name = "nid") Integer id, @RequestParam(name = "name") String name) {
+        return rConsumerService.findConfig(id, name);
+    }
 }

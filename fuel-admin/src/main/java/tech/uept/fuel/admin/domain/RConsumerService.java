@@ -56,4 +56,9 @@ public class RConsumerService {
         MyPage page = PageUtils.listToPage(list, pageNo, pageSize);
         return page;
     }
+
+    public Object findConfig(Integer id, String name) {
+        String nAdddr = namesrvService.getAddrById(id);
+        return client.consumerConfig(name, nAdddr);
+    }
 }

@@ -141,7 +141,7 @@ public class RocketmqComplexClient {
         }
     }
 
-    public List<SubscriptionGroupConfig> consumerList(String namesrv, String consumer) {
+    public List<SubscriptionGroupConfig> consumerConfig(String namesrv, String consumer) {
         MQAdminExt admin = getAdmin(namesrv);
         try {
             ClusterInfo clusterInfo = admin.examineBrokerClusterInfo();
