@@ -21,6 +21,7 @@ import org.apache.rocketmq.common.protocol.body.SubscriptionGroupWrapper;
 import org.apache.rocketmq.common.protocol.body.TopicList;
 import org.apache.rocketmq.common.protocol.route.BrokerData;
 import org.apache.rocketmq.common.protocol.route.TopicRouteData;
+import org.apache.rocketmq.common.subscription.SubscriptionGroupConfig;
 import org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
 import org.apache.rocketmq.tools.admin.MQAdminExt;
 import org.springframework.stereotype.Component;
@@ -117,7 +118,6 @@ public class RocketmqComplexClient {
     public Map<String, String> brokerGetStats(String namesrv, String brokerAddr) {
         MQAdminExt admin = getAdmin(namesrv);
         try {
-            Map<String, String> map = new HashMap<String, String>();
             KVTable kvTable = admin.fetchBrokerRuntimeStats(brokerAddr);
             return kvTable.getTable();
         } catch (Exception e) {
@@ -136,6 +136,23 @@ public class RocketmqComplexClient {
                 set.addAll(subscriptionGroupWrapper.getSubscriptionGroupTable().keySet());
             }
             return new ArrayList<>(set);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<SubscriptionGroupConfig> consumerList(String namesrv, String consumer) {
+        MQAdminExt admin = getAdmin(namesrv);
+        try {
+            ClusterInfo clusterInfo = admin.examineBrokerClusterInfo();
+            List<SubscriptionGroupConfig> list = new ArrayList<>();
+            for (String brokerName : clusterInfo.getBrokerAddrTable().keySet()) {
+                String brokerAddress = clusterInfo.getBrokerAddrTable().get(brokerName).selectBrokerAddr();
+                SubscriptionGroupConfig subscriptionGroupConfig = admin.examineSubscriptionGroupConfig(brokerAddress,
+                        consumer);
+                list.add(subscriptionGroupConfig);
+            }
+            return list;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
