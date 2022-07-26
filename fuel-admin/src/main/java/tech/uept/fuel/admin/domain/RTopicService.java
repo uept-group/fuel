@@ -1,8 +1,6 @@
 package tech.uept.fuel.admin.domain;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import tech.uept.fuel.admin.basic.cache.LocalCache;
 import tech.uept.fuel.admin.basic.rmq.RocketmqComplexClient;
+import tech.uept.fuel.admin.basic.util.PageUtils;
 
 @Service
 public class RTopicService {
@@ -50,19 +49,7 @@ public class RTopicService {
 
     public Object list(Integer id, Integer pageNo, Integer pageSize) {
         List<String> list = this.list(id);
-        int first = (pageNo - 1) * pageSize;
-        int last = pageNo * pageSize;
-        if (list.size() < first) {
-            throw new RuntimeException("pageNo or PageSize error");
-        }
-        if (list.size() < last) {
-            last = list.size();
-        }
-        List<String> list2 = list.subList(first, last);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("total", list.size());
-        map.put("list", list2);
-        return map;
+        return PageUtils.listToPage(list, pageNo, pageSize);
     }
 
 }

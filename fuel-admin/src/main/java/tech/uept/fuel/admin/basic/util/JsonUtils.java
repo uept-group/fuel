@@ -5,10 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonUtils {
 
-    public String toString(Object value) {
-        ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    public static String toString(Object value) {
         try {
-            String json = mapper.writeValueAsString(value);
+            String json = MAPPER.writeValueAsString(value);
             return json;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

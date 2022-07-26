@@ -10,6 +10,11 @@ public class LocalCache {
 
     private static Map<String, CacheNode> cache = new ConcurrentHashMap<String, CacheNode>();
 
+    /**
+     * @param key
+     * @param data
+     * @param time 毫秒
+     */
     public void put(String key, Object data, long time) {
         time = System.currentTimeMillis() + time;
         CacheNode cacheNode = new CacheNode();
@@ -18,7 +23,7 @@ public class LocalCache {
         cache.put(key, cacheNode);
     }
 
-    public Object get(String key) {
+    public <T> T get(String key) {
         CacheNode cacheNode = cache.get(key);
         if (cacheNode == null) {
             return null;
@@ -26,7 +31,7 @@ public class LocalCache {
         if (System.currentTimeMillis() > cacheNode.getTime()) {
             return null;
         }
-        return cacheNode.getData();
+        return (T) cacheNode.getData();
     }
 
     static class CacheNode {
