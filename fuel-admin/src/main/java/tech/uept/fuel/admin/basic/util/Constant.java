@@ -8,4 +8,6 @@ public class Constant {
 
     public static final String TOPIC_TYPE_DLQ = "dlq";
 
+    public static final String TOPIC_TYPE_SYSTEM = "system";
+
 }
