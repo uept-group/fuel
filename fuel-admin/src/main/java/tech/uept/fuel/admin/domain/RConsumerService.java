@@ -2,11 +2,15 @@ package tech.uept.fuel.admin.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import com.beust.jcommander.internal.Lists;
 
 import tech.uept.fuel.admin.basic.cache.LocalCache;
 import tech.uept.fuel.admin.basic.model.MyPage;
@@ -43,13 +47,7 @@ public class RConsumerService {
     public MyPage findPage(Integer namesrvId, Integer pageNo, Integer pageSize, String name) {
         List<String> list = this.list(namesrvId);
         if (StringUtils.isNotBlank(name)) {
-            List<String> list2 = new ArrayList<>();
-            for (String s : list) {
-                if (s.contains(name)) {
-                    list2.add(s);
-                }
-            }
-            list = list2;
+            list = list.stream().filter(s -> s.contains(name)).collect(Collectors.toList());
         }
         MyPage page = PageUtils.listToPage(list, pageNo, pageSize);
         return page;
