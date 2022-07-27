@@ -23,7 +23,10 @@ public class RTopicAction {
 
     @GetMapping("/findByPage")
     public Object findByPage(@RequestParam(name = "nid") Integer id, @RequestParam(name = "pageNo") Integer pageNo,
-            @RequestParam(name = "pageSize") Integer pageSize, @RequestParam(name = "name") String name,
+            @RequestParam(name = "pageSize") Integer pageSize,
+            // name topic的名称，支持模糊搜索
+            @RequestParam(name = "name") String name,
+            // 类型，下拉框必选，分别是base普通队列，retry重试队列，dlq->DLQ队列，system系统队列
             @RequestParam(name = "type") String type) {
         return rTopicService.list(id, pageNo, pageSize, name, type);
     }
