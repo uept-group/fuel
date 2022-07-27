@@ -2,7 +2,6 @@ package tech.uept.fuel.admin.api;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -39,13 +38,19 @@ public class RBrokerAction {
     }
 
     @GetMapping("/findStats")
-    public List<BrokerState> findStats(@RequestParam(name = "nid") Integer nid, @RequestParam(name = "addr") String addr) {
+    public List<BrokerState> findStats(@RequestParam(name = "nid") Integer nid,
+            @RequestParam(name = "addr") String addr) {
         return rBrokerService.queryStats(nid, addr);
     }
 
     @GetMapping("/queryList")
     public Object queryList() {
         return rBrokerService.queryList();
+    }
+
+    @GetMapping("/findNameList")
+    public Object findBrokerNameList(@RequestParam(name = "nid") Integer nid) {
+        return rBrokerService.findNameList(nid);
     }
 
     @GetMapping("/initConfig")
