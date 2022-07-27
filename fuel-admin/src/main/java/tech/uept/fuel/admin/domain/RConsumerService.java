@@ -25,8 +25,6 @@ public class RConsumerService {
     @Resource
     private LocalCache localCache;
 
-    private static final String CACHE_KEY_PRE = "consumer:";
-
     public List<String> list(Integer namesrvId) {
         List<String> list = localCache.get(genKey(namesrvId));
         if (list != null) {
@@ -39,10 +37,10 @@ public class RConsumerService {
     }
 
     public String genKey(Integer id) {
-        return CACHE_KEY_PRE + id;
+        return "consumer:" + id;
     }
 
-    public Object findPage(Integer namesrvId, Integer pageNo, Integer pageSize, String name) {
+    public MyPage findPage(Integer namesrvId, Integer pageNo, Integer pageSize, String name) {
         List<String> list = this.list(namesrvId);
         if (StringUtils.isNotBlank(name)) {
             List<String> list2 = new ArrayList<>();
