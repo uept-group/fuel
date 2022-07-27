@@ -16,10 +16,10 @@ public class RTopicAction {
     @Resource
     private RTopicService rTopicService;
 
-    @GetMapping("/list")
-    public Object list(@RequestParam(name = "nid") Integer id) {
-        return rTopicService.list(id);
-    }
+//    @GetMapping("/list")
+//    public Object list(@RequestParam(name = "nid") Integer id) {
+//        return rTopicService.list(id);
+//    }
 
     @GetMapping("/findByPage")
     public Object findByPage(@RequestParam(name = "nid") Integer id, @RequestParam(name = "pageNo") Integer pageNo,
