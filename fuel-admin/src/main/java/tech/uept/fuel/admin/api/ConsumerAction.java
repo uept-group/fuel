@@ -13,7 +13,7 @@ import tech.uept.fuel.admin.basic.model.ConsumerModel;
 import tech.uept.fuel.admin.domain.ConsumerService;
 
 @RestController
-@RequestMapping("/topic")
+@RequestMapping("/consumer")
 public class ConsumerAction {
 
     @Resource
