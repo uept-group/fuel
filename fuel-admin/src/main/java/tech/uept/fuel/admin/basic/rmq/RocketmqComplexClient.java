@@ -168,17 +168,21 @@ public class RocketmqComplexClient {
         }
     }
 
-    public List<QueryMessage> messageQueryByKey(String namesrv, String topic, String key) {
+    public List<MessageExt> messageQueryByKey(String namesrv, String topic, String key, long startTime, long endTime) {
+        if (endTime == 0) {
+            endTime = System.currentTimeMillis();
+        }
+        key = null;
         MQAdminExt admin = getAdmin(namesrv);
         try {
-            List<QueryMessage> list = new ArrayList<QueryMessage>();
-            QueryResult queryResult = admin.queryMessage(topic, key, 64, 0, System.currentTimeMillis());
+            List<MessageExt> list = new ArrayList<MessageExt>();
+            QueryResult queryResult = admin.queryMessage(topic, key, 64, startTime, endTime);
             if (queryResult == null || CollectionUtils.isEmpty(queryResult.getMessageList())) {
                 return list;
             }
             for (MessageExt messageExt : queryResult.getMessageList()) {
-                QueryMessage queryMessage = BeanUtils.msgToMsg(messageExt);
-                list.add(queryMessage);
+//                QueryMessage queryMessage = BeanUtils.msgToMsg(messageExt);
+                list.add(messageExt);
             }
             return list;
         } catch (Exception e) {

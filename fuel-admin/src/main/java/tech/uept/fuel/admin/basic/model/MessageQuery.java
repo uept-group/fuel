@@ -10,7 +10,7 @@ public class MessageQuery {
 
     private String topic;
 
-    private String taskId;
+//    private String taskId;
 
     private long begin;
 
@@ -40,13 +40,13 @@ public class MessageQuery {
         this.topic = topic;
     }
 
-    public String getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(String taskId) {
-        this.taskId = taskId;
-    }
+//    public String getTaskId() {
+//        return taskId;
+//    }
+//
+//    public void setTaskId(String taskId) {
+//        this.taskId = taskId;
+//    }
 
     public long getBegin() {
         return begin;
