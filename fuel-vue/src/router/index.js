@@ -65,7 +65,7 @@ export const constantRoutes = [
         path: 'nameserv',
         name: 'Nameserv',
         component: () => import('@/views/nameserv/index'),
-        meta: { title: '名称服务', icon: 'tree' }
+        meta: { title: '名称服务', icon: 'el-icon-s-data' }
       },
       {
         path: 'broker',
