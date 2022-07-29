@@ -9,35 +9,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import tech.uept.fuel.admin.basic.model.TopicModel;
-import tech.uept.fuel.admin.domain.TopicService;
+import tech.uept.fuel.admin.basic.model.ConsumerModel;
+import tech.uept.fuel.admin.domain.ConsumerService;
 
 @RestController
-@RequestMapping("/topic")
-public class TopicAction {
+@RequestMapping("/consumer")
+public class ConsumerAction {
 
     @Resource
-    private TopicService topicService;
+    private ConsumerService consumerService;
 
     @GetMapping("/findPage")
     public Object findPage(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
             @RequestParam(name = "name", defaultValue = "") String name) {
-        return topicService.queryPage(pageNo, pageSize, name);
+        return consumerService.queryPage(pageNo, pageSize, name);
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody TopicModel topicModel) {
-        topicService.insert(topicModel);
+    public void add(@RequestBody ConsumerModel model) {
+        consumerService.insert(model);
     }
 
     @PostMapping("/update")
-    public void update(@RequestBody TopicModel topicModel) {
-        topicService.update(topicModel);
+    public void update(@RequestBody ConsumerModel model) {
+        consumerService.update(model);
     }
 
     @PostMapping("/delete")
-    public void delete(@RequestBody TopicModel topicModel) {
-        topicService.deleteById(topicModel.getId());
+    public void delete(@RequestBody ConsumerModel model) {
+        consumerService.deleteById(model.getId());
     }
 }

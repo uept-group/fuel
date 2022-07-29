@@ -33,4 +33,8 @@ public class TopicService {
         TopicPo po = BeanUtils.getCopy(topicModel, new TopicPo());
         topicMapper.updateById(po);
     }
+
+    public void deleteById(int id) {
+        topicMapper.deleteById(id);
+    }
 }

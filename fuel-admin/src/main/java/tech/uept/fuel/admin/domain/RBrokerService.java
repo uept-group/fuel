@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-
-import com.alibaba.fastjson.JSONObject;
 import com.beust.jcommander.internal.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.common.protocol.body.ClusterInfo;
@@ -42,6 +40,13 @@ public class RBrokerService {
     public void updateBroker(Integer id, String brokerName, String key, String value) {
         String addr = namesrvService.getAddrById(id);
         client.brokerUpdate(addr, brokerName, key, value);
+    }
+
+    public List<String> findNameList(int nid) {
+        String addr = namesrvService.getAddrById(nid);
+        ClusterInfo info = client.brokerQueryInfo(addr);
+        List<String> list = new ArrayList<>(info.getBrokerAddrTable().keySet());
+        return list;
     }
 
     public List<BrokerModel> queryList() {
@@ -121,7 +126,7 @@ public class RBrokerService {
         String addr = namesrvService.getAddrById(nid);
         List<BrokerState> returnList = Lists.newArrayList();
         Map<String, String> config = client.brokerGetConfig(addr, brokerAddr);
-        for (String key: config.keySet()) {
+        for (String key : config.keySet()) {
             BrokerState brokerState = new BrokerState();
             brokerState.setKey(key);
             brokerState.setValue(config.getOrDefault(key, ""));
